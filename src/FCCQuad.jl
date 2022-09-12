@@ -208,8 +208,8 @@ function tonequad!(output::AA,workspaces,center::Real,radius::Real,
     while true
         Fct.chebcoeffs!(samples,ifft_in,ifft_out,ifft_work,N)
         for m in 1:length(freqs)
-            output[:,m] = collect(fccquadSampled!(ifft_out,freqs[m],N,center,radius,cfreq,
-                                                  weightmethod,weights,weights_work))
+            output[:,m] .= fccquadSampled!(ifft_out,freqs[m],N,center,radius,cfreq,
+                                                  weightmethod,weights,weights_work)
         end
         base=vectornorm(view(output,1,:))
         delta=vectornorm(view(output,2,:))
